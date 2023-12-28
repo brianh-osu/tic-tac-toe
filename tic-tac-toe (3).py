@@ -1,3 +1,8 @@
+#TODO: Add GUI 
+#TODO: Data validation for input prompts (1. user must enter between range, 2. user cannot play on a used tile)
+#TODO: Game should end if win condition is met, and prompt user to play again or exit. 
+#TODO: If game is a draw (all tiles used, no plays remain) then game must break.
+
 board = [['O' for x in range(3)] for x in range(3)]
 board = [['O','O','O'],['X','X','X'],['X','X','X']]
 board = [['X','X','X'],['O','O','O'],['X','X','X']]
