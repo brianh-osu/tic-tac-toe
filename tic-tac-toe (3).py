@@ -1,5 +1,5 @@
 #TODO: Add GUI 
-#TODO: Data validation for input prompts (1. user must enter between range, 2. user cannot play on a used tile)
+#TODO: Data validation for input prompts ( 2. user cannot play on a used tile)
 #TODO: Game should end if win condition is met, and prompt user to play again or exit. 
 #TODO: If game is a draw (all tiles used, no plays remain) then game must break.
 
@@ -92,15 +92,17 @@ def check_win_conditions(letter, player_num):
         # print('Continue playing..')
         return False 
 
-
-#check_win_conditions('O')
-
+def input_validation(choice, player_num):
+    while choice == 0 or choice > (board_len**2):
+        choice = int(input(f"Player {player_num}, where would you like to place (#1-{total_spots})"))
+    return choice 
+    
 total_spots = len(board[0])**2
 while True: 
     #prompt play 
     board_len = len(board[0])
-    p1_choice = int(input(f"Player 1, where would you like to place (#1-{total_spots})"))
-    p2_choice = int(input(f"Player 2, where would you like to place (#1-{total_spots})"))
+    p1_choice = input_validation(0, 1)
+    p2_choice = input_validation(0, 2)
     
     #calculate positions to place on board 
     p1_r = p1_choice // board_len 
