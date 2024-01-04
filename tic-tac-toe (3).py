@@ -1,11 +1,13 @@
-#TODO: Add GUI 
-
 board = [['_','_','_','_'],['_','_','_','_'],['_','_','_','_'],['_','_','_','_']]
 # board = [['_','_','O'], ['O','O','O'], ['O','O','O']]
 # board = [['_', '_', 'X'], ['_', 'X', 'X'],['X', 'X', '_']]
 # board = [['_', '_', 'O'], ['O', 'X', 'X'], ['O', 'X', 'O']]
 print('The board has been initialized as:')
-print(board)
+# print(board)
+
+def print_board():
+    for rows in board: 
+        print(rows)
 
 def input_validation(player_num):
     choice = 0 
@@ -41,7 +43,8 @@ def play_tile(player_num, tile):
     elif player_num == 2:
         board[tile_r][tile_c] = 'X' 
     print('The board is now: ')
-    print(board)
+    print_board()
+    #print(board)
     
 def check_win_conditions(letter, player_num):
     """Pass in letter which is a string of the player's piece 
@@ -131,6 +134,7 @@ def check_full():
 board_len = len(board[0])
 total_spots = len(board[0])**2 
 
+print_board()
 while True:
     p1_tile = input_validation(1)
     play_tile(1, p1_tile)
