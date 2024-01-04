@@ -1,3 +1,6 @@
+#TODO: GUI
+#TODO: Initialize board using an input length (prompt user)
+
 board = [['_','_','_','_'],['_','_','_','_'],['_','_','_','_'],['_','_','_','_']]
 # board = [['_','_','O'], ['O','O','O'], ['O','O','O']]
 # board = [['_', '_', 'X'], ['_', 'X', 'X'],['X', 'X', '_']]
