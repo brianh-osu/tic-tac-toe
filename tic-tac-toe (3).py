@@ -1,9 +1,9 @@
 #TODO: Add GUI 
-#TODO: If game is a draw (all tiles used, no plays remain) then game must break.
 
 board = [['_','_','_','_'],['_','_','_','_'],['_','_','_','_'],['_','_','_','_']]
 # board = [['_','_','O'], ['O','O','O'], ['O','O','O']]
 # board = [['_', '_', 'X'], ['_', 'X', 'X'],['X', 'X', '_']]
+# board = [['_', '_', 'O'], ['O', 'X', 'X'], ['O', 'X', 'O']]
 print('The board has been initialized as:')
 print(board)
 
@@ -116,6 +116,17 @@ def check_win_conditions(letter, player_num):
         return False 
     else:
         return True 
+        
+def check_full():
+    played_tiles = 0 
+    for rows in board: 
+        for cols in rows: 
+            if cols != '_':
+                played_tiles += 1 
+    if played_tiles == total_spots:
+        return True 
+    else:
+        return False 
     
 board_len = len(board[0])
 total_spots = len(board[0])**2 
@@ -123,11 +134,19 @@ total_spots = len(board[0])**2
 while True:
     p1_tile = input_validation(1)
     play_tile(1, p1_tile)
-    p2_tile = input_validation(2)
-    play_tile(2, p2_tile) 
     if check_win_conditions('O', 1) is True:
         print('The game is over, you have won player 1.')
         break 
-    elif check_win_conditions('X', 2) is True:
+    if check_full() is True:
+        print('The game is over. All tiles played. Draw.')
+        break 
+    
+    p2_tile = input_validation(2)
+    play_tile(2, p2_tile) 
+    if check_win_conditions('X', 2) is True:
         print('The game is over, you have won player 2.')
         break 
+    if check_full() is True:
+        print('The game is over. All tiles played. Draw.')
+        break 
+    print() #blank line 
