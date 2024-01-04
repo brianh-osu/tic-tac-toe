@@ -1,22 +1,28 @@
 #TODO: GUI
-#TODO: Initialize board using an input length (prompt user)
-
-board = [['_','_','_','_'],['_','_','_','_'],['_','_','_','_'],['_','_','_','_']]
+#TODO: Modulate using a main function instead of global while loop 
+# board = [['_','_','_','_'],['_','_','_','_'],['_','_','_','_'],['_','_','_','_']]
 # board = [['_','_','O'], ['O','O','O'], ['O','O','O']]
 # board = [['_', '_', 'X'], ['_', 'X', 'X'],['X', 'X', '_']]
 # board = [['_', '_', 'O'], ['O', 'X', 'X'], ['O', 'X', 'O']]
+
+board = int(input('How large would you like the board? Type an integer (i,e. 1 = 1x1 board, 2 = 2x2 board, ...)'))
+
+board_len = board 
+total_spots = board_len**2 
+board = [['_' for x in range(board)] for x in range(board)]
 print('The board has been initialized as:')
-# print(board)
 
 def print_board():
+    """prints the board in clean format"""
     for rows in board: 
         print(rows)
 
 def input_validation(player_num):
+    """validates placement. Must be within 0 and total spots, and also cannot be on a tile that is already played on. (If placing on a used tile, recursion will occur."""
     choice = 0 
-    while choice <= 0 or choice > (board_len**2):
+    while choice <= 0 or choice > (total_spots):
         choice = int(input(f"Player {player_num}, where would you like to place (#1-{total_spots})"))
-        if choice <= 0 or choice > (board_len**2):
+        if choice <= 0 or choice > (total_spots):
             print('Invalid range (placement should be between 1 and '+ str(total_spots)+'. Try again.')
         else: 
             tile = get_tile(choice) #checking tile 
@@ -40,6 +46,7 @@ def get_tile(choice):
     return [row, col] 
     
 def play_tile(player_num, tile):
+    """intended placement already validated up to this point. This method updates the board"""
     tile_r, tile_c = tile[0], tile[1]
     if player_num == 1:
         board[tile_r][tile_c] = 'O'
@@ -47,8 +54,7 @@ def play_tile(player_num, tile):
         board[tile_r][tile_c] = 'X' 
     print('The board is now: ')
     print_board()
-    #print(board)
-    
+
 def check_win_conditions(letter, player_num):
     """Pass in letter which is a string of the player's piece 
     checks if win conditions exist, if it does return True otherwise return False"""
@@ -124,6 +130,7 @@ def check_win_conditions(letter, player_num):
         return True 
         
 def check_full():
+    """checks if there is any remaining plays left"""
     played_tiles = 0 
     for rows in board: 
         for cols in rows: 
@@ -133,9 +140,6 @@ def check_full():
         return True 
     else:
         return False 
-    
-board_len = len(board[0])
-total_spots = len(board[0])**2 
 
 print_board()
 while True:
@@ -157,3 +161,5 @@ while True:
         print('The game is over. All tiles played. Draw.')
         break 
     print() #blank line 
+        
+
